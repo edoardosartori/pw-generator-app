@@ -11,8 +11,7 @@ class TokenLoader {
       'assets/tokens/fusion-tokens.json',
     );
 
-    final Map<String, dynamic> json =
-        jsonDecode(rawJson);
+    final Map<String, dynamic> json = jsonDecode(rawJson);
 
     final flattened = <String, dynamic>{};
 
@@ -21,26 +20,21 @@ class TokenLoader {
       String path,
     ) {
       node.forEach((key, value) {
-        final current =
-            path.isEmpty ? key : '$path.$key';
+        final current = path.isEmpty ? key : '$path.$key';
 
         if (value is Map<String, dynamic>) {
           if (value.containsKey(r'$value')) {
             var tokenValue = value[r'$value'];
 
-            if (tokenValue is String &&
-                tokenValue.startsWith('{')) {
-              tokenValue = TokenResolver
-                  .resolveReference(
+            if (tokenValue is String && tokenValue.startsWith('{')) {
+              tokenValue = TokenResolver.resolveReference(
                 tokenValue,
                 json,
               );
             }
 
-            if (tokenValue is String &&
-                tokenValue.startsWith('#')) {
-              tokenValue =
-                  TokenResolver.parseColor(
+            if (tokenValue is String && tokenValue.startsWith('#')) {
+              tokenValue = TokenResolver.parseColor(
                 tokenValue,
               );
             }

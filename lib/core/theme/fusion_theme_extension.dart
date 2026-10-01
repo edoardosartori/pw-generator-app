@@ -72,19 +72,14 @@ class FusionThemeExtension extends ThemeExtension<FusionThemeExtension> {
     return FusionThemeExtension(
       stateActive: Color.lerp(stateActive, other.stateActive, t)!,
       stateOnActive: Color.lerp(stateOnActive, other.stateOnActive, t)!,
-      stateActiveTint:
-          Color.lerp(stateActiveTint, other.stateActiveTint, t)!,
-      passwordLetter:
-          Color.lerp(passwordLetter, other.passwordLetter, t)!,
-      passwordDigit:
-          Color.lerp(passwordDigit, other.passwordDigit, t)!,
-      passwordSymbol:
-          Color.lerp(passwordSymbol, other.passwordSymbol, t)!,
+      stateActiveTint: Color.lerp(stateActiveTint, other.stateActiveTint, t)!,
+      passwordLetter: Color.lerp(passwordLetter, other.passwordLetter, t)!,
+      passwordDigit: Color.lerp(passwordDigit, other.passwordDigit, t)!,
+      passwordSymbol: Color.lerp(passwordSymbol, other.passwordSymbol, t)!,
       success: Color.lerp(success, other.success, t)!,
       danger: Color.lerp(danger, other.danger, t)!,
       border: Color.lerp(border, other.border, t)!,
-      surfaceVariant:
-          Color.lerp(surfaceVariant, other.surfaceVariant, t)!,
+      surfaceVariant: Color.lerp(surfaceVariant, other.surfaceVariant, t)!,
       track: Color.lerp(track, other.track, t)!,
     );
   }

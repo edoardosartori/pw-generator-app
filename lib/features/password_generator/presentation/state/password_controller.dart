@@ -45,7 +45,6 @@ class PasswordController extends ValueNotifier<AppState> {
   Future<void> copyPassword() async {
     final password = value.result.password;
 
-
 // Android 13+:
 // Clipboard content should ideally be marked
 // as sensitive through a MethodChannel calling
@@ -63,8 +62,7 @@ class PasswordController extends ValueNotifier<AppState> {
     _clipboardTimer = Timer(
       const Duration(seconds: 30),
       () async {
-        final current =
-            await Clipboard.getData(
+        final current = await Clipboard.getData(
           'text/plain',
         );
 

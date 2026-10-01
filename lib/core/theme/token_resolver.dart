@@ -7,9 +7,7 @@ class TokenResolver {
     String path,
     Map<String, dynamic> root,
   ) {
-    final cleaned = path
-        .replaceAll('{', '')
-        .replaceAll('}', '');
+    final cleaned = path.replaceAll('{', '').replaceAll('}', '');
 
     dynamic current = root;
 
@@ -25,8 +23,7 @@ class TokenResolver {
       throw Exception('Reference not found: $path');
     }
 
-    if (current is Map<String, dynamic> &&
-        current.containsKey(r'$value')) {
+    if (current is Map<String, dynamic> && current.containsKey(r'$value')) {
       return current[r'$value'];
     }
 

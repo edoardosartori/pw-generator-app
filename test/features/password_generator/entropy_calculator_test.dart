@@ -6,8 +6,7 @@ void main() {
   test(
     'calculates entropy',
     () {
-      final entropy =
-          EntropyCalculator.calculate(
+      final entropy = EntropyCalculator.calculate(
         length: 16,
         poolSize: 72,
       );

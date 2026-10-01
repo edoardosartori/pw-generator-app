@@ -10,17 +10,13 @@ class CharacterSets {
     '|',
   };
 
-  static const lowercase =
-      'abcdefghijklmnopqrstuvwxyz';
+  static const lowercase = 'abcdefghijklmnopqrstuvwxyz';
 
-  static const uppercase =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  static const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-  static const digits =
-      '0123456789';
+  static const digits = '0123456789';
 
-  static const symbols =
-      '!@#\$%^&*()_+-=[]{}<>?';
+  static const symbols = '!@#\$%^&*()_+-=[]{}<>?';
 
   static String removeAmbiguous(
     String source,

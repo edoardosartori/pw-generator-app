@@ -14,8 +14,7 @@ void main() {
         },
       };
 
-      final result =
-          TokenResolver.resolveReference(
+      final result = TokenResolver.resolveReference(
         '{a.b}',
         root,
       );
@@ -30,8 +29,7 @@ void main() {
   test(
     'parses rgb',
     () {
-      final color =
-          TokenResolver.parseColor(
+      final color = TokenResolver.parseColor(
         '#5B8CFF',
       );
 
@@ -45,8 +43,7 @@ void main() {
   test(
     'parses rgba css format',
     () {
-      final color =
-          TokenResolver.parseColor(
+      final color = TokenResolver.parseColor(
         '#00F0FF1F',
       );
 

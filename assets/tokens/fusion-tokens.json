@@ -107,13 +107,48 @@
 
   "typography": {
     "$description": "Stili di testo. Solo due pesi (400 e 500). I numeri e i dati usano sempre il font mono.",
-    "titleLarge": { "family": "{primitive.font.family.sans}", "size": 22, "weight": "{primitive.font.weight.medium}", "lineHeight": 28 },
-    "body": { "family": "{primitive.font.family.sans}", "size": 16, "weight": "{primitive.font.weight.regular}", "lineHeight": 24 },
-    "bodySmall": { "family": "{primitive.font.family.sans}", "size": 14, "weight": "{primitive.font.weight.regular}", "lineHeight": 20 },
-    "label": { "family": "{primitive.font.family.sans}", "size": 14, "weight": "{primitive.font.weight.medium}", "lineHeight": 20 },
-    "caption": { "family": "{primitive.font.family.mono}", "size": 12, "weight": "{primitive.font.weight.regular}", "lineHeight": 16 },
-    "dataMedium": { "family": "{primitive.font.family.mono}", "size": 14, "weight": "{primitive.font.weight.regular}", "lineHeight": 20 },
-    "dataDisplay": { "family": "{primitive.font.family.mono}", "size": 24, "weight": "{primitive.font.weight.regular}", "lineHeight": 32 }
+    "titleLarge": {
+      "family": "{primitive.font.family.sans}",
+      "size": 22,
+      "weight": "{primitive.font.weight.medium}",
+      "lineHeight": 28
+    },
+    "body": {
+      "family": "{primitive.font.family.sans}",
+      "size": 16,
+      "weight": "{primitive.font.weight.regular}",
+      "lineHeight": 24
+    },
+    "bodySmall": {
+      "family": "{primitive.font.family.sans}",
+      "size": 14,
+      "weight": "{primitive.font.weight.regular}",
+      "lineHeight": 20
+    },
+    "label": {
+      "family": "{primitive.font.family.sans}",
+      "size": 14,
+      "weight": "{primitive.font.weight.medium}",
+      "lineHeight": 20
+    },
+    "caption": {
+      "family": "{primitive.font.family.mono}",
+      "size": 12,
+      "weight": "{primitive.font.weight.regular}",
+      "lineHeight": 16
+    },
+    "dataMedium": {
+      "family": "{primitive.font.family.mono}",
+      "size": 14,
+      "weight": "{primitive.font.weight.regular}",
+      "lineHeight": 20
+    },
+    "dataDisplay": {
+      "family": "{primitive.font.family.mono}",
+      "size": 24,
+      "weight": "{primitive.font.weight.regular}",
+      "lineHeight": 32
+    }
   },
 
   "semantic": {
@@ -215,13 +250,29 @@
       "height": 52,
       "radius": "{primitive.radius.lg}",
       "gap": "{primitive.space.md}",
-      "primary": { "background": "action.primary", "foreground": "action.onPrimary" },
-      "secondary": { "background": "surfaceVariant", "foreground": "textPrimary", "borderWidth": 1, "borderColor": "border" }
+      "primary": {
+        "background": "action.primary",
+        "foreground": "action.onPrimary"
+      },
+      "secondary": {
+        "background": "surfaceVariant",
+        "foreground": "textPrimary",
+        "borderWidth": 1,
+        "borderColor": "border"
+      }
     },
     "chip": { "height": 32, "radius": "{primitive.radius.md}" },
-    "badge": { "radius": "{primitive.radius.md}", "background": "state.activeTint", "foreground": "state.active" },
+    "badge": {
+      "radius": "{primitive.radius.md}",
+      "background": "state.activeTint",
+      "foreground": "state.active"
+    },
     "progressSegment": { "height": 6, "radius": 3, "gap": 6 },
-    "switch": { "width": 48, "height": 28, "radius": "{primitive.radius.pill}" },
+    "switch": {
+      "width": 48,
+      "height": 28,
+      "radius": "{primitive.radius.pill}"
+    },
     "slider": { "trackHeight": 6, "thumbSize": 24 }
   },
 

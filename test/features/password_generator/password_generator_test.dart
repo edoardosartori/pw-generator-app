@@ -6,14 +6,12 @@ void main() {
   group(
     'PasswordGenerator',
     () {
-      final generator =
-          PasswordGenerator();
+      final generator = PasswordGenerator();
 
       test(
         'generates correct length',
         () {
-          final result =
-              generator.generate(
+          final result = generator.generate(
             const PasswordOptions(
               length: 24,
               uppercase: true,
@@ -33,8 +31,7 @@ void main() {
       test(
         'contains uppercase',
         () {
-          final result =
-              generator.generate(
+          final result = generator.generate(
             const PasswordOptions(
               length: 16,
               uppercase: true,
@@ -56,8 +53,7 @@ void main() {
       test(
         'contains numbers',
         () {
-          final result =
-              generator.generate(
+          final result = generator.generate(
             const PasswordOptions(
               length: 16,
               uppercase: false,
@@ -79,8 +75,7 @@ void main() {
       test(
         'contains symbols',
         () {
-          final result =
-              generator.generate(
+          final result = generator.generate(
             const PasswordOptions(
               length: 16,
               uppercase: false,
@@ -104,8 +99,7 @@ void main() {
       test(
         'excludes ambiguous characters',
         () {
-          final result =
-              generator.generate(
+          final result = generator.generate(
             const PasswordOptions(
               length: 32,
               uppercase: true,
@@ -116,32 +110,27 @@ void main() {
           );
 
           expect(
-            result.password
-                .contains('O'),
+            result.password.contains('O'),
             false,
           );
 
           expect(
-            result.password
-                .contains('0'),
+            result.password.contains('0'),
             false,
           );
 
           expect(
-            result.password
-                .contains('I'),
+            result.password.contains('I'),
             false,
           );
 
           expect(
-            result.password
-                .contains('l'),
+            result.password.contains('l'),
             false,
           );
 
           expect(
-            result.password
-                .contains('1'),
+            result.password.contains('1'),
             false,
           );
         },

@@ -71,7 +71,7 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
                     children: [
                       const Expanded(
                         child: Text(
-                          'Lunghezza',
+                          'Lenght',
                         ),
                       ),
                       Text(

@@ -3,8 +3,7 @@ import '../../models/password_options.dart';
 import '../../models/password_result.dart';
 
 class PasswordGeneratorState {
-  PasswordGeneratorState()
-      : _generator = PasswordGenerator() {
+  PasswordGeneratorState() : _generator = PasswordGenerator() {
     _options = const PasswordOptions.initial();
 
     result = _generator.generate(_options);

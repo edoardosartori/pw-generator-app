@@ -31,24 +31,19 @@ class FusionTheme {
     required Brightness brightness,
     required String semanticPrefix,
   }) {
-    final primary =
-        tokens.color('$semanticPrefix.action.primary');
+    final primary = tokens.color('$semanticPrefix.action.primary');
 
-    final background =
-        tokens.color('$semanticPrefix.background');
+    final background = tokens.color('$semanticPrefix.background');
 
-    final surface =
-        tokens.color('$semanticPrefix.surface');
+    final surface = tokens.color('$semanticPrefix.surface');
 
-    final text =
-        tokens.color('$semanticPrefix.textPrimary');
+    final text = tokens.color('$semanticPrefix.textPrimary');
 
     return ThemeData(
       useMaterial3: true,
       brightness: brightness,
       scaffoldBackgroundColor: background,
       fontFamily: 'Inter',
-
       colorScheme: ColorScheme(
         brightness: brightness,
         primary: primary,
@@ -62,7 +57,6 @@ class FusionTheme {
         surface: surface,
         onSurface: text,
       ),
-
       textTheme: const TextTheme(
         titleLarge: TextStyle(
           fontSize: 22,
@@ -70,31 +64,19 @@ class FusionTheme {
           fontFamily: 'Inter',
         ),
       ),
-
       extensions: [
         FusionThemeExtension(
-          stateActive:
-              tokens.color('$semanticPrefix.state.active'),
-          stateOnActive:
-              tokens.color('$semanticPrefix.state.onActive'),
-          stateActiveTint:
-              tokens.color('$semanticPrefix.state.activeTint'),
-          passwordLetter:
-              tokens.color('$semanticPrefix.password.letter'),
-          passwordDigit:
-              tokens.color('$semanticPrefix.password.digit'),
-          passwordSymbol:
-              tokens.color('$semanticPrefix.password.symbol'),
-          success:
-              tokens.color('$semanticPrefix.feedback.success'),
-          danger:
-              tokens.color('$semanticPrefix.feedback.danger'),
-          border:
-              tokens.color('$semanticPrefix.border'),
-          surfaceVariant:
-              tokens.color('$semanticPrefix.surfaceVariant'),
-          track:
-              tokens.color('$semanticPrefix.track'),
+          stateActive: tokens.color('$semanticPrefix.state.active'),
+          stateOnActive: tokens.color('$semanticPrefix.state.onActive'),
+          stateActiveTint: tokens.color('$semanticPrefix.state.activeTint'),
+          passwordLetter: tokens.color('$semanticPrefix.password.letter'),
+          passwordDigit: tokens.color('$semanticPrefix.password.digit'),
+          passwordSymbol: tokens.color('$semanticPrefix.password.symbol'),
+          success: tokens.color('$semanticPrefix.feedback.success'),
+          danger: tokens.color('$semanticPrefix.feedback.danger'),
+          border: tokens.color('$semanticPrefix.border'),
+          surfaceVariant: tokens.color('$semanticPrefix.surfaceVariant'),
+          track: tokens.color('$semanticPrefix.track'),
         ),
       ],
     );

@@ -7,54 +7,34 @@ import 'entropy_calculator.dart';
 class PasswordGenerator {
   PasswordGenerator();
 
-  static const String lowercase =
-      'abcdefghjkmnpqrstuvwxyz';
+  static const String lowercase = 'abcdefghjkmnpqrstuvwxyz';
 
-  static const String uppercase =
-      'ABCDEFGHJKLMNPQRSTUVWXYZ';
+  static const String uppercase = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
 
-  static const String numbers =
-      '23456789';
+  static const String numbers = '23456789';
 
-  static const String symbols =
-      '!@#\$%^&*()_+-=[]{}<>?';
+  static const String symbols = '!@#\$%^&*()_+-=[]{}<>?';
 
-  static const String lowercaseAll =
-      'abcdefghijklmnopqrstuvwxyz';
+  static const String lowercaseAll = 'abcdefghijklmnopqrstuvwxyz';
 
-  static const String uppercaseAll =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  static const String uppercaseAll = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-  static const String numbersAll =
-      '0123456789';
+  static const String numbersAll = '0123456789';
 
-  static const String symbolsAll =
-      '!@#\$%^&*()_+-=[]{}<>?';
+  static const String symbolsAll = '!@#\$%^&*()_+-=[]{}<>?';
 
   PasswordResult generate(
     PasswordOptions options,
   ) {
     final random = Random.secure();
 
-    final lowercaseSet =
-        options.avoidAmbiguous
-            ? lowercase
-            : lowercaseAll;
+    final lowercaseSet = options.avoidAmbiguous ? lowercase : lowercaseAll;
 
-    final uppercaseSet =
-        options.avoidAmbiguous
-            ? uppercase
-            : uppercaseAll;
+    final uppercaseSet = options.avoidAmbiguous ? uppercase : uppercaseAll;
 
-    final numbersSet =
-        options.avoidAmbiguous
-            ? numbers
-            : numbersAll;
+    final numbersSet = options.avoidAmbiguous ? numbers : numbersAll;
 
-    final symbolsSet =
-        options.avoidAmbiguous
-            ? symbols
-            : symbolsAll;
+    final symbolsSet = options.avoidAmbiguous ? symbols : symbolsAll;
 
     final requiredSets = <String>[
       lowercaseSet,
@@ -105,8 +85,7 @@ class PasswordGenerator {
       password: chars.join(),
       entropy: entropy,
       poolSize: pool.length,
-      strength:
-          EntropyCalculator.strength(entropy),
+      strength: EntropyCalculator.strength(entropy),
     );
   }
 
@@ -114,11 +93,7 @@ class PasswordGenerator {
     List<String> list,
     Random random,
   ) {
-    for (
-      int i = list.length - 1;
-      i > 0;
-      i--
-    ) {
+    for (int i = list.length - 1; i > 0; i--) {
       final j = random.nextInt(i + 1);
 
       final tmp = list[i];
