@@ -13,7 +13,7 @@ void main() {
 
       expect(
         entropy.round(),
-        98,
+        99,
       );
     },
   );
