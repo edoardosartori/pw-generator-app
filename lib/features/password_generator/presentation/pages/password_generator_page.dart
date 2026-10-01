@@ -45,7 +45,7 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Generatore',
+                    'Generator',
                     style: Theme.of(
                       context,
                     ).textTheme.titleLarge,
@@ -71,7 +71,7 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
                     children: [
                       const Expanded(
                         child: Text(
-                          'Lenght',
+                          'Length',
                         ),
                       ),
                       Text(
@@ -95,7 +95,7 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
                     },
                   ),
                   OptionSwitchTile(
-                    title: 'Maiuscole',
+                    title: 'Capital',
                     value: options.uppercase,
                     onChanged: (
                       value,
@@ -108,7 +108,7 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
                     },
                   ),
                   OptionSwitchTile(
-                    title: 'Numeri',
+                    title: 'Numbers',
                     value: options.numbers,
                     onChanged: (
                       value,
@@ -121,7 +121,7 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
                     },
                   ),
                   OptionSwitchTile(
-                    title: 'Simboli',
+                    title: 'Symbols',
                     value: options.symbols,
                     onChanged: (
                       value,
@@ -134,7 +134,7 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
                     },
                   ),
                   OptionSwitchTile(
-                    title: 'Evita ambigui',
+                    title: 'Avoid Ambiguous',
                     value: options.avoidAmbiguous,
                     onChanged: (
                       value,
@@ -157,7 +157,7 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
                           onPressed: () async {
                             await controller.copyPassword();
 
-                            if (!mounted) {
+                            if (!context.mounted) {
                               return;
                             }
 
@@ -166,13 +166,13 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
                             ).showSnackBar(
                               const SnackBar(
                                 content: Text(
-                                  'Password copiata',
+                                  'Password copied',
                                 ),
                               ),
                             );
                           },
                           child: Text(
-                            state.copied ? 'Copiata' : 'Copia',
+                            state.copied ? 'Copied' : 'Copy',
                           ),
                         ),
                       ),
@@ -183,7 +183,7 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
                         child: OutlinedButton(
                           onPressed: controller.regenerate,
                           child: const Text(
-                            'Nuova',
+                            'Regenerate',
                           ),
                         ),
                       ),
