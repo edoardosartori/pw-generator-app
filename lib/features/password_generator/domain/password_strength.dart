@@ -9,16 +9,16 @@ extension PasswordStrengthX on PasswordStrength {
   String get label {
     switch (this) {
       case PasswordStrength.weak:
-        return 'Debole';
+        return 'Weak';
 
       case PasswordStrength.fair:
-        return 'Discreta';
+        return 'Good';
 
       case PasswordStrength.strong:
-        return 'Forte';
+        return 'Strong';
 
       case PasswordStrength.veryStrong:
-        return 'Molto forte';
+        return 'Very Strong';
     }
   }
 

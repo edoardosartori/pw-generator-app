@@ -1,35 +1,109 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'core/theme/fusion_tokens.dart';
 import 'core/theme/fusion_theme.dart';
 import 'core/theme/token_loader.dart';
 import 'features/password_generator/presentation/pages/password_generator_page.dart';
 
-Future<void> main() async {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final tokens = await TokenLoader.load();
+  final preferences = await SharedPreferences.getInstance();
+  final savedThemeMode = preferences.getString(_themeModePreferenceKey);
+  final initialThemeMode = switch (savedThemeMode) {
+    'light' => ThemeMode.light,
+    'dark' => ThemeMode.dark,
+    _ => ThemeMode.system,
+  };
 
   runApp(
-    MyApp(tokens: tokens),
+    MyApp(
+      tokens: tokens,
+      preferences: preferences,
+      initialThemeMode: initialThemeMode,
+    ),
   );
 }
 
-class MyApp extends StatelessWidget {
+const _themeModePreferenceKey = 'theme_mode';
+
+class MyApp extends StatefulWidget {
   final FusionTokens tokens;
+  final SharedPreferences preferences;
+  final ThemeMode initialThemeMode;
 
   const MyApp({
     super.key,
     required this.tokens,
+    required this.preferences,
+    required this.initialThemeMode,
   });
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late ThemeMode _themeMode;
+
+  @override
+  void initState() {
+    super.initState();
+    _themeMode = widget.initialThemeMode;
+  }
+
+  void _toggleTheme() {
+    final platformBrightness =
+        WidgetsBinding.instance.platformDispatcher.platformBrightness;
+    final isDark = _themeMode == ThemeMode.dark ||
+        (_themeMode == ThemeMode.system &&
+            platformBrightness == Brightness.dark);
+    final nextMode = isDark ? ThemeMode.light : ThemeMode.dark;
+
+    setState(() {
+      _themeMode = nextMode;
+    });
+
+    unawaited(_saveThemeMode(nextMode));
+  }
+
+  Future<void> _saveThemeMode(ThemeMode mode) async {
+    final saved = await widget.preferences.setString(
+      _themeModePreferenceKey,
+      mode.name,
+    );
+
+    if (!saved) {
+      FlutterError.reportError(
+        FlutterErrorDetails(
+          exception: StateError('Could not save the selected theme mode.'),
+          library: 'password generator',
+        ),
+      );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final platformBrightness =
+        WidgetsBinding.instance.platformDispatcher.platformBrightness;
+    final isDark = _themeMode == ThemeMode.dark ||
+        (_themeMode == ThemeMode.system &&
+            platformBrightness == Brightness.dark);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: FusionTheme.light(tokens),
-      darkTheme: FusionTheme.dark(tokens),
-      themeMode: ThemeMode.system,
-      home: const PasswordGeneratorPage(),
+      theme: FusionTheme.light(widget.tokens),
+      darkTheme: FusionTheme.dark(widget.tokens),
+      themeMode: _themeMode,
+      home: PasswordGeneratorPage(
+        onToggleTheme: _toggleTheme,
+        isDarkMode: isDark,
+      ),
     );
   }
 }

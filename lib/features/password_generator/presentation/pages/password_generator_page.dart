@@ -6,21 +6,33 @@ import '../widgets/password_card.dart';
 import '../widgets/strength_meter.dart';
 
 class PasswordGeneratorPage extends StatefulWidget {
+  final VoidCallback onToggleTheme;
+  final bool isDarkMode;
+
   const PasswordGeneratorPage({
     super.key,
+    required this.onToggleTheme,
+    required this.isDarkMode,
   });
 
   @override
-  State<PasswordGeneratorPage> createState() => _PasswordGeneratorPageState();
+  State createState() => _PasswordGeneratorPageState();
 }
 
 class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
   late final PasswordController controller;
+  double _refreshTurns = 0;
+  void _animateRefresh() {
+    setState(() {
+      _refreshTurns += 1;
+    });
+
+    controller.regenerate();
+  }
 
   @override
   void initState() {
     super.initState();
-
     controller = PasswordController();
   }
 
@@ -28,55 +40,47 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: controller,
-      builder: (
-        context,
-        state,
-        _,
-      ) {
+      builder: (context, state, _) {
         final options = state.options;
-
         return Scaffold(
           body: SafeArea(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.all(
-                20,
-              ),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Generator',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleLarge,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'Generator',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                      ),
+                      IconButton(
+                        tooltip: 'Toggle theme',
+                        onPressed: widget.onToggleTheme,
+                        icon: Icon(
+                          widget.isDarkMode
+                              ? Icons.light_mode_outlined
+                              : Icons.dark_mode_outlined,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(
-                    height: 24,
-                  ),
+                  const SizedBox(height: 34),
                   PasswordCard(
                     password: state.result.password,
                     length: options.length,
                     entropy: state.result.entropy,
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  StrengthMeter(
-                    strength: state.result.strength,
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
+                  const SizedBox(height: 20),
+                  StrengthMeter(strength: state.result.strength),
+                  const SizedBox(height: 24),
                   Row(
                     children: [
-                      const Expanded(
-                        child: Text(
-                          'Length',
-                        ),
-                      ),
-                      Text(
-                        options.length.toString(),
-                      ),
+                      const Expanded(child: Text('Length')),
+                      Text(options.length.toString()),
                     ],
                   ),
                   Slider(
@@ -84,71 +88,49 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
                     max: 32,
                     divisions: 24,
                     value: options.length.toDouble(),
-                    onChanged: (
-                      v,
-                    ) {
+                    onChanged: (v) {
                       controller.updateOptions(
-                        options.copyWith(
-                          length: v.round(),
-                        ),
+                        options.copyWith(length: v.round()),
                       );
                     },
                   ),
                   OptionSwitchTile(
                     title: 'Capital',
                     value: options.uppercase,
-                    onChanged: (
-                      value,
-                    ) {
+                    onChanged: (value) {
                       controller.updateOptions(
-                        options.copyWith(
-                          uppercase: value,
-                        ),
+                        options.copyWith(uppercase: value),
                       );
                     },
                   ),
                   OptionSwitchTile(
                     title: 'Numbers',
                     value: options.numbers,
-                    onChanged: (
-                      value,
-                    ) {
+                    onChanged: (value) {
                       controller.updateOptions(
-                        options.copyWith(
-                          numbers: value,
-                        ),
+                        options.copyWith(numbers: value),
                       );
                     },
                   ),
                   OptionSwitchTile(
                     title: 'Symbols',
                     value: options.symbols,
-                    onChanged: (
-                      value,
-                    ) {
+                    onChanged: (value) {
                       controller.updateOptions(
-                        options.copyWith(
-                          symbols: value,
-                        ),
+                        options.copyWith(symbols: value),
                       );
                     },
                   ),
                   OptionSwitchTile(
                     title: 'Avoid Ambiguous',
                     value: options.avoidAmbiguous,
-                    onChanged: (
-                      value,
-                    ) {
+                    onChanged: (value) {
                       controller.updateOptions(
-                        options.copyWith(
-                          avoidAmbiguous: value,
-                        ),
+                        options.copyWith(avoidAmbiguous: value),
                       );
                     },
                   ),
-                  const SizedBox(
-                    height: 24,
-                  ),
+                  const SizedBox(height: 24),
                   Row(
                     children: [
                       Expanded(
@@ -160,35 +142,27 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
                             if (!context.mounted) {
                               return;
                             }
-
-                            ScaffoldMessenger.of(
-                              context,
-                            ).showSnackBar(
-                              const SnackBar(
-                                content: Text(
-                                  'Password copied',
-                                ),
-                              ),
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Password copied')),
                             );
                           },
-                          child: Text(
-                            state.copied ? 'Copied' : 'Copy',
-                          ),
+                          child: Text(state.copied ? 'Copied' : 'Copy'),
                         ),
                       ),
-                      const SizedBox(
-                        width: 12,
-                      ),
+                      const SizedBox(width: 12),
                       Expanded(
                         child: OutlinedButton(
-                          onPressed: controller.regenerate,
-                          child: const Text(
-                            'Regenerate',
+                          onPressed: _animateRefresh,
+                          child: AnimatedRotation(
+                            turns: _refreshTurns,
+                            duration: const Duration(milliseconds: 220),
+                            curve: Curves.easeOutCubic,
+                            child: const Icon(Icons.autorenew_rounded),
                           ),
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
@@ -201,6 +175,7 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
   @override
   void dispose() {
     controller.dispose();
+
     super.dispose();
   }
 }
