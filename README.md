@@ -1,17 +1,25 @@
-# pw_gen
+# PW Generator - built with Flutter
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+PW Generator - Secure Password Generator. A lightweight password generation app built with Flutter, designed to create strong and customizable passwords locally.
 
-A few resources to get you started if this is your first Flutter project:
+## Features
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+* **Password generation:** generate secure random passwords instantly
+* **Customization:** choose password length and the character types to include
+* **Character options:** uppercase letters, lowercase letters, numbers and symbols
+* **Password strength:** visual indication of password complexity
+* **Copy to clipboard:** quickly copy generated passwords for use elsewhere
+* **Offline:** password generation works entirely locally without requiring an internet connection
+* **Cross-platform:** built with Flutter and designed to run on supported Flutter platforms
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Privacy
+
+PW Generator runs entirely on your device.
+
+Generated passwords are not sent to a server, uploaded to the cloud or stored remotely. The app does not require an account or an internet connection to generate passwords.
+
+## Screenshots
+![PW Generator demo](docs/password-generator-dark.jpg)
+![PW Generator demo](docs/password-generator-light.jpg)
