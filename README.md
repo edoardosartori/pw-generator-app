@@ -21,5 +21,8 @@ PW Generator runs entirely on your device.
 Generated passwords are not sent to a server, uploaded to the cloud or stored remotely. The app does not require an account or an internet connection to generate passwords.
 
 ## Screenshots
-![PW Generator demo](docs/password-generator-dark.jpg)
-![PW Generator demo](docs/password-generator-light.jpg)
+
+<img src="docs/password-generator-dark.jpg" width="250">
+<img src="docs/password-generator-light.jpg" width="250">
+</br>
+<img src="docs/demo.gif" width="250">
