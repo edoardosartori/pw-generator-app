@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.fusionlabs.pw_gen"
+    namespace = "com.rebelTailor.pw_gen"
     compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
@@ -15,7 +15,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.fusionlabs.pw_gen"
+        applicationId = "com.rebelTailor.pw_gen"
         minSdk = 34
         targetSdk = 34
         versionCode = 1
