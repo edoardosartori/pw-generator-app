@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.pw_gen"
+    namespace = "com.fusionlabs.pw_gen"
     compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
@@ -15,7 +15,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.pw_gen"
+        applicationId = "com.fusionlabs.pw_gen"
         minSdk = 34
         targetSdk = 34
         versionCode = 1
