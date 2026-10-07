@@ -1,4 +1,4 @@
-package com.example.pw_gen
+package com.rebelTailor.pw_gen
 
 import android.os.Build
 import android.os.Bundle
@@ -9,7 +9,7 @@ class MainActivity : FlutterActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // Disabilita i margini delle system bar a livello di finestra Android
+        // Disable Android system bar margins at the window level
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.setDecorFitsSystemWindows(false)
         } else {
