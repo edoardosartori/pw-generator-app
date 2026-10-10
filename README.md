@@ -20,6 +20,8 @@ PW Generator runs entirely on your device.
 
 Generated passwords are not sent to a server, uploaded to the cloud or stored remotely. The app does not require an account or an internet connection to generate passwords.
 
+Built by RebelTailor. All rights reserved.
+
 ## Screenshots
 
 <img src="docs/password-generator-dark.jpg" width="250">
