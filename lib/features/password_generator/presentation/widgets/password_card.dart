@@ -98,13 +98,13 @@ class PasswordCard extends StatelessWidget {
     final letter = RegExp(r'[a-zA-Z]');
 
     if (digit.hasMatch(char)) {
-      return ext.passwordDigit;
+      return ext.characterDigit;
     }
 
     if (letter.hasMatch(char)) {
-      return ext.passwordLetter;
+      return ext.characterLetter;
     }
 
-    return ext.passwordSymbol;
+    return ext.characterSymbol;
   }
 }
