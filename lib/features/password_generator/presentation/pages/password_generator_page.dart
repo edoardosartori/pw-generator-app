@@ -67,13 +67,8 @@ class _PasswordGeneratorPageState extends State<PasswordGeneratorPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Expanded(
-                          child: Text(
-                            'Generator',
-                            style: theme.textTheme.titleLarge,
-                          ),
-                        ),
                         IconButton(
                           tooltip: 'Toggle theme',
                           onPressed: widget.onToggleTheme,
