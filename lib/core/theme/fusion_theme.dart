@@ -77,6 +77,7 @@ class FusionTheme {
           border: tokens.color('$semanticPrefix.border'),
           surfaceVariant: tokens.color('$semanticPrefix.surfaceVariant'),
           track: tokens.color('$semanticPrefix.track'),
+          scrim: tokens.color('$semanticPrefix.scrim'),
         ),
       ],
     );

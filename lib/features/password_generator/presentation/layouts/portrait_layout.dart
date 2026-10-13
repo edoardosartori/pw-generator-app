@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pw_gen/core/feedback/fusion_toast.dart';
 
 import '../state/app_state.dart';
 import '../state/password_controller.dart';
@@ -138,8 +139,9 @@ class PortraitLayout extends StatelessWidget {
                           if (!context.mounted) {
                             return;
                           }
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Password copied')),
+                          FusionToast.show(
+                            context,
+                            message: 'Password copied',
                           );
                         },
                         child: Text(state.copied ? 'Copied' : 'Copy'),

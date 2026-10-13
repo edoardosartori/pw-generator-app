@@ -17,6 +17,8 @@ class FusionThemeExtension extends ThemeExtension<FusionThemeExtension> {
   final Color surfaceVariant;
   final Color track;
 
+  final Color scrim;
+
   const FusionThemeExtension({
     required this.stateActive,
     required this.stateOnActive,
@@ -29,6 +31,7 @@ class FusionThemeExtension extends ThemeExtension<FusionThemeExtension> {
     required this.border,
     required this.surfaceVariant,
     required this.track,
+    required this.scrim,
   });
 
   @override
@@ -44,6 +47,7 @@ class FusionThemeExtension extends ThemeExtension<FusionThemeExtension> {
     Color? border,
     Color? surfaceVariant,
     Color? track,
+    Color? scrim,
   }) {
     return FusionThemeExtension(
       stateActive: stateActive ?? this.stateActive,
@@ -57,6 +61,7 @@ class FusionThemeExtension extends ThemeExtension<FusionThemeExtension> {
       border: border ?? this.border,
       surfaceVariant: surfaceVariant ?? this.surfaceVariant,
       track: track ?? this.track,
+      scrim: scrim ?? this.scrim,
     );
   }
 
@@ -81,6 +86,7 @@ class FusionThemeExtension extends ThemeExtension<FusionThemeExtension> {
       border: Color.lerp(border, other.border, t)!,
       surfaceVariant: Color.lerp(surfaceVariant, other.surfaceVariant, t)!,
       track: Color.lerp(track, other.track, t)!,
+      scrim: Color.lerp(scrim, other.scrim, t)!,
     );
   }
 }

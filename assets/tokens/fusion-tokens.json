@@ -2,7 +2,7 @@
   "$description": "Design tokens of the Fusion style (Carbon Slate base with cyan accent for state and security). DTCG-inspired format: \"$value\" and \"$type\"; references use the {token.path.format}.",
   "meta": {
     "name": "Fusion",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "status": "draft derived from static mockups, to be validated on a real device",
     "units": {
       "dimension": "dp",
@@ -16,6 +16,8 @@
     "color": {
       "$type": "color",
       "ink": { "$value": "#07070F" },
+      "inkA45": { "$value": "#07070F73" },
+      "inkA60": { "$value": "#07070F99" },
       "white": { "$value": "#FFFFFF" },
       "slate": {
         "950": { "$value": "#0D0F12" },
@@ -186,7 +188,8 @@
         "offTrack": { "$value": "{primitive.color.slate.850}" },
         "offKnob": { "$value": "{primitive.color.slate.400}" },
         "onKnob": { "$value": "{primitive.color.white}" }
-      }
+      },
+      "scrim": { "$value": "{primitive.color.inkA60}" }
     },
     "light": {
       "$type": "color",
@@ -222,7 +225,8 @@
         "offTrack": { "$value": "{primitive.color.paper.150}" },
         "offKnob": { "$value": "{primitive.color.paper.300}" },
         "onKnob": { "$value": "{primitive.color.white}" }
-      }
+      },
+      "scrim": { "$value": "{primitive.color.inkA45}" }
     }
   },
 
@@ -236,6 +240,10 @@
     "elevation": {
       "dark": "no shadow: depth is provided by surface tone and a subtle border",
       "light": "soft shadow: color {primitive.color.paper.950} at 8%, blur 12, offset y 2"
+    },
+    "scrim": {
+      "dark": "dialogs sit on ink at 60% ({primitive.color.inkA60}) plus background blur 4; toasts sit on the same ink without blur",
+      "light": "dialogs sit on ink at 45% ({primitive.color.inkA45}) plus background blur 4; toasts sit on the same ink without blur"
     }
   },
 
@@ -273,7 +281,40 @@
       "height": 28,
       "radius": "{primitive.radius.pill}"
     },
-    "slider": { "trackHeight": 6, "thumbSize": 24 }
+    "slider": { "trackHeight": 6, "thumbSize": 24 },
+    "toast": {
+      "$description": "Transient feedback message, centered on screen and slightly above the exact center. Sits on the scrim (effect.scrim, no blur) so the app behind is dimmed. A bottom bar in accent.symbol shows the remaining time before it expires. Adapts to the display: compact on phones, regular on tablets. Tap to dismiss. Implemented in FusionToast.",
+      "radius": { "$value": "{primitive.radius.md}" },
+      "paddingHorizontal": { "$value": "{primitive.space.2xl}" },
+      "paddingVertical": { "$value": "{primitive.space.lg}" },
+      "gap": { "$value": "{primitive.space.lg}" },
+      "iconSize": { "$value": 24 },
+      "iconSizeCompact": { "$value": 20 },
+      "fontSize": { "$value": 18 },
+      "fontSizeCompact": { "$value": 16 },
+      "progressBarHeight": { "$value": 4 },
+      "maxWidthCompact": { "$value": 310 },
+      "maxWidthRegular": { "$value": 420 },
+      "centerOffsetY": { "$value": 24 },
+      "duration": { "$value": 1500 }
+    },
+    "dialog": {
+      "$description": "Modal surface on a scrim (see effect.scrim): ink over the app plus background blur. Adapts to the display like the toast: 310 dp wide on phones, 420 dp on tablets. Implemented in FusionDialog.",
+      "radius": { "$value": "{primitive.radius.lg}" },
+      "padding": { "$value": "{primitive.space.2xl}" },
+      "iconBadgeSize": { "$value": 48 },
+      "iconSize": { "$value": 24 },
+      "titleSize": { "$value": 18 },
+      "messageSize": { "$value": 14 },
+      "maxWidthCompact": { "$value": 310 },
+      "maxWidthRegular": { "$value": 420 },
+      "scrimBlur": { "$value": 4 },
+      "actionGap": { "$value": "{primitive.space.md}" },
+      "destructive": {
+        "background": "feedback.danger",
+        "foreground": "{primitive.color.white}"
+      }
+    }
   },
 
   "rules": {
@@ -309,6 +350,26 @@
       "minContrastLargeTextAndUi": 3,
       "note": "Light theme contrast ratios were calculated manually and must be verified with a checker before release.",
       "neverRelyOnColorAlone": true
+    }
+  },
+
+  "implementation": {
+    "$description": "Inventory of the Fusion widgets that already exist. Not real documentation: it records what is implemented (and where) so the apps that share these tokens (pw-generator-app, calc-app) know what is already done and reusable.",
+    "core": {
+      "FusionTokens": "lib/core/theme/fusion_tokens.dart — flat access to the loaded tokens (get, color, dimension, text)",
+      "TokenLoader": "lib/core/theme/token_loader.dart — loads fusion-tokens.json, resolves {references} and parses colors",
+      "FusionTheme / FusionThemeExtension": "lib/core/theme — ThemeData light/dark from the tokens; the extension carries stateActive, characterLetter/Digit/Symbol, success, danger, border, surfaceVariant, track and scrim",
+      "FusionMotion": "lib/core/theme/fusion_motion.dart — shared durations (fast 150 ms, normal 220 ms) and the standard curve",
+      "FusionTokensScope": "lib/core/theme/fusion_tokens_scope.dart — InheritedWidget that exposes FusionTokens below the MaterialApp",
+      "FusionToast": "lib/core/feedback/fusion_toast.dart — transient feedback centered on screen, success/error variants, tap to dismiss, default 1500 ms (component.toast)",
+      "FusionDialog": "lib/core/feedback/fusion_dialog.dart — modal dialog on a blurred scrim (component.dialog); show() for a single action, confirm() for cancel/confirm with a destructive option"
+    },
+    "pw-generator-app": {
+      "PasswordCard": "lib/features/password_generator/presentation/widgets/password_card.dart — password display card (card tokens; optional action widget overlaid top-left)",
+      "StrengthMeter": "lib/features/password_generator/presentation/widgets/strength_meter.dart — segmented strength bar",
+      "OptionSwitchTile": "lib/features/password_generator/presentation/widgets/option_switch_tile.dart — option row with switch",
+      "PortraitLayout": "lib/features/password_generator/presentation/layouts/portrait_layout.dart — vertical UI, single scroll",
+      "LandscapeLayout": "lib/features/password_generator/presentation/layouts/landscape_layout.dart — two columns (password and actions / options card), per-column scroll, maxWidth 900"
     }
   }
 }

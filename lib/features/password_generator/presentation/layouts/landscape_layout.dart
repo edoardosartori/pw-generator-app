@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pw_gen/core/feedback/fusion_toast.dart';
 import 'package:pw_gen/core/theme/fusion_theme_extension.dart';
 
 import '../state/app_state.dart';
@@ -101,11 +102,9 @@ class LandscapeLayout extends StatelessWidget {
                                       if (!context.mounted) {
                                         return;
                                       }
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
-                                          content: Text('Password copied'),
-                                        ),
+                                      FusionToast.show(
+                                        context,
+                                        message: 'Password copied',
                                       );
                                     },
                                     child: Text(

@@ -9,6 +9,8 @@ import 'core/theme/fusion_theme.dart';
 import 'core/theme/token_loader.dart';
 import 'features/password_generator/presentation/pages/password_generator_page.dart';
 
+import 'core/theme/fusion_tokens_scope.dart';
+
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -110,14 +112,17 @@ class _MyAppState extends State<MyApp> {
       ),
     );
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: FusionTheme.light(widget.tokens),
-      darkTheme: FusionTheme.dark(widget.tokens),
-      themeMode: _themeMode,
-      home: PasswordGeneratorPage(
-        onToggleTheme: _toggleTheme,
-        isDarkMode: isDark,
+    return FusionTokensScope(
+      tokens: widget.tokens,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: FusionTheme.light(widget.tokens),
+        darkTheme: FusionTheme.dark(widget.tokens),
+        themeMode: _themeMode,
+        home: PasswordGeneratorPage(
+          onToggleTheme: _toggleTheme,
+          isDarkMode: isDark,
+        ),
       ),
     );
   }
