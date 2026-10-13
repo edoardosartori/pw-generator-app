@@ -1,5 +1,3 @@
-import 'dart:ui' show FontFeature;
-
 import 'package:flutter/material.dart';
 import 'package:pw_gen/core/theme/fusion_theme_extension.dart';
 
