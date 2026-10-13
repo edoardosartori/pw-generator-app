@@ -22,7 +22,7 @@ Generated passwords are not sent to a server, uploaded to the cloud or stored re
 
 Built by RebelTailor. All rights reserved.
 
-## Screenshots
+## Screenshots (alpha version)
 
 <img src="docs/password-generator-dark.jpg" width="250">
 <img src="docs/password-generator-light.jpg" width="250">
