@@ -1,3 +1,5 @@
+import 'dart:ui' show FontFeature;
+
 import 'package:flutter/material.dart';
 import 'package:pw_gen/core/theme/fusion_theme_extension.dart';
 
@@ -62,6 +64,14 @@ class PasswordCard extends StatelessWidget {
                           fontFamily: 'JetBrains Mono',
                           fontSize: 24,
                           height: 1.2,
+                          // Avoiding JetBrains Mono draws
+                          // programming ligatures ('<=' and '>=' as
+                          // single glyphs that look like the math
+                          // symbols ≤ and ≥).
+                          fontFeatures: [
+                            FontFeature.disable('calt'),
+                            FontFeature.disable('liga'),
+                          ],
                         ),
                       ),
                     ),
