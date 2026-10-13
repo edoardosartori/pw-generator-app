@@ -14,7 +14,7 @@ enum FusionFeedbackVariant { success, error }
 /// Shows a centered toast on a scrim that dims the app behind.
 /// The toast adapts its size and font to the device display and
 /// dismisses itself after a while: a bottom bar shows the
-/// remaining time. Tapping the toast dismisses it early.
+/// remaining time. Any tap dismisses it immediately.
 class FusionToast {
   FusionToast._();
 
@@ -94,7 +94,7 @@ class _FusionToastViewState extends State<_FusionToastView>
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        _timer = Timer(widget.duration, _dismiss);
+        _timer = Timer(widget.duration, _fadeOut);
         _progress.forward(from: 0);
       } else if (status == AnimationStatus.dismissed) {
         widget.onDismissed();
@@ -104,6 +104,18 @@ class _FusionToastViewState extends State<_FusionToastView>
     _controller.forward();
   }
 
+  // Natural expiry: fades out, then the entry is removed.
+  void _fadeOut() {
+    if (_dismissed) {
+      return;
+    }
+
+    _dismissed = true;
+    _controller.reverse();
+  }
+
+  // Any tap anywhere on the screen: the toast goes away
+  // immediately, no fade out.
   void _dismiss() {
     if (_dismissed) {
       return;
@@ -111,7 +123,7 @@ class _FusionToastViewState extends State<_FusionToastView>
 
     _dismissed = true;
     _timer?.cancel();
-    _controller.reverse();
+    widget.onDismissed();
   }
 
   @override
@@ -142,36 +154,37 @@ class _FusionToastViewState extends State<_FusionToastView>
     };
 
     return Positioned.fill(
-      child: Stack(
-        children: [
-          // Scrim over the app behind (effect.scrim, no blur):
-          // dims the page so the toast stands out. Taps pass
-          // through to the app.
-          Positioned.fill(
-            child: IgnorePointer(
+      // Any tap anywhere (on the scrim too) dismisses the
+      // toast immediately; the tap does not reach the app
+      // below.
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: _dismiss,
+        child: Stack(
+          children: [
+            // Scrim over the app behind (effect.scrim, no blur):
+            // dims the page so the toast stands out.
+            Positioned.fill(
               child: FadeTransition(
                 opacity: _controller,
                 child: ColoredBox(color: ext.scrim),
               ),
             ),
-          ),
-          Positioned.fill(
-            child: Center(
-              child: Transform.translate(
-                offset: Offset(
-                  0,
-                  -tokens.dimension('component.toast.centerOffsetY'),
-                ),
-                child: FadeTransition(
-                  opacity: _controller,
-                  child: GestureDetector(
-                    onTap: _dismiss,
-                    // The toast sits in an Overlay, outside any
-                    // Material/Scaffold: without this Material the
-                    // debug build paints the classic yellow double
-                    // underline under the text (missing
-                    // DefaultTextStyle).
+            Positioned.fill(
+              child: Center(
+                child: Transform.translate(
+                  offset: Offset(
+                    0,
+                    -tokens.dimension('component.toast.centerOffsetY'),
+                  ),
+                  child: FadeTransition(
+                    opacity: _controller,
                     child: Material(
+                      // The toast sits in an Overlay, outside any
+                      // Material/Scaffold: without this Material the
+                      // debug build paints the classic yellow double
+                      // underline under the text (missing
+                      // DefaultTextStyle).
                       color: Colors.transparent,
                       child: Container(
                         clipBehavior: Clip.antiAlias,
@@ -275,8 +288,8 @@ class _FusionToastViewState extends State<_FusionToastView>
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
