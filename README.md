@@ -22,9 +22,17 @@ Generated passwords are not sent to a server, uploaded to the cloud or stored re
 
 Built by RebelTailor. All rights reserved.
 
-## Screenshots (alpha version)
+## Screenshots
 
-<img src="docs/password-generator-dark.jpg" width="250">
-<img src="docs/password-generator-light.jpg" width="250">
-</br>
-<img src="docs/demo.gif" width="250">
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="docs/dark-theme.jpg" width="250"></td>
+      <td width="30"></td>
+      <td><img src="docs/light-theme.jpg" width="250"></td>
+    </tr>
+    <tr>
+      <td colspan="3" align="center"><img src="docs/demo.gif" width="250"></td>
+    </tr>
+  </table>
+</div>
