@@ -75,8 +75,8 @@ class LandscapeLayout extends StatelessWidget {
                                 visualDensity: VisualDensity.compact,
                                 padding: EdgeInsets.zero,
                                 constraints: const BoxConstraints(
-                                  minWidth: 40,
-                                  minHeight: 40,
+                                  minWidth: 68,
+                                  minHeight: 68,
                                 ),
                                 icon: Icon(
                                   isDarkMode
