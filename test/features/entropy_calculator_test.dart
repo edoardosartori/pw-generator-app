@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pw_gen/features/password_generator/domain/entropy_calculator.dart';
-import 'package:pw_gen/features/password_generator/domain/password_strength.dart';
+import 'package:pw_gen/features/domain/entropy_calculator.dart';
+import 'package:pw_gen/features/domain/password_strength.dart';
 
 void main() {
   test(

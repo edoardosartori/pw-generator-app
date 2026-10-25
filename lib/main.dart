@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'core/theme/fusion_tokens.dart';
 import 'core/theme/fusion_theme.dart';
 import 'core/theme/token_loader.dart';
-import 'features/password_generator/presentation/pages/password_generator_page.dart';
+import 'features/presentation/pages/password_generator_page.dart';
 
 import 'core/theme/fusion_tokens_scope.dart';
 

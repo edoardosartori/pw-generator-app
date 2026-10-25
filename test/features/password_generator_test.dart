@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pw_gen/features/password_generator/domain/password_generator.dart';
-import 'package:pw_gen/features/password_generator/models/password_options.dart';
+import 'package:pw_gen/features/domain/password_generator.dart';
+import 'package:pw_gen/features/models/password_options.dart';
 
 void main() {
   group(
